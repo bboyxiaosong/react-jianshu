@@ -1,0 +1,74 @@
+
+1 开发简书
+2 创建项目
+    npx create-react-app my-app
+    cd my-app
+    npm start
+3 整理文件 
+ App.js 
+ index.js
+ index.css
+
+4. 安装 css 管理模块 
+yarn add styled-components
+
+替换 index.css 重命名为 style.js
+2018 年十月份 开始 
+
+import {createGlobalStyle} from 'styled-components';
+ 
+export const GlobalStyle = createGlobalStyle`
+    body {
+        background: blue;
+    }
+`;
+
+import React, { Component,Fragment } from 'react';
+import Header from "./common/header";
+//导入样式文件
+注：在styled-component V4版本中injectGlobal API除去，取而代之的是createGlobalStyle样式组件。
+import {GlobalStyle} from "./style";
+ 
+class App extends Component {
+    render() {
+        return (
+            <Fragment>
+                <GlobalStyle/>
+                    <Header/>
+            </Fragment>
+        )
+    }
+}
+
+export default App;
+原文链接：https://blog.csdn.net/qq_32063079/article/details/83277054
+
+5. 在 src 目录下创建common 文件夹
+然后创建组件文件夹 header
+index.js
+如下
+import React,{ Component } from 'react';
+
+import {
+    HeaderWrapper
+} from './style'
+class Header extends Component{
+    render(){
+        return (
+            <HeaderWrapper>
+                Header
+            </HeaderWrapper>
+        )
+    }
+}
+export default Header;
+////////////////////////////
+style.js
+如下
+import styled  from 'styled-components';
+
+export const HeaderWrapper = styled.div `
+    height:58px;
+    border-bottom:1px solid #f0f0f0;
+` 
+6.下一步就开始编码了
