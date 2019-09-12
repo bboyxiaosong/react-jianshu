@@ -10,8 +10,17 @@
  index.css
 
 4. 安装 css 管理模块 
-yarn add styled-components
+yarn add styled-components;
 
+css 动画 模块
+yarn add css-transition-group;
+数据管理
+yarn add redux;
+
+yarn add react-redux;
+对象管理模块
+
+yarn add immutable
 替换 index.css 重命名为 style.js
 2018 年十月份 开始 
 
@@ -72,3 +81,5 @@ export const HeaderWrapper = styled.div `
     border-bottom:1px solid #f0f0f0;
 ` 
 6.下一步就开始编码了
+style.js 
+每一个元素都是作为组件 使用

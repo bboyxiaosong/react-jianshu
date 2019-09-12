@@ -4,7 +4,7 @@ import logoPic from '../../statics/nav-logo.png';
 export const HeaderWrapper = styled.div `
     position:relative;
     height:56px;
-    border-bottom:1px solid #f0f0f0;
+    border-bottom:1px solid   #f0f0f0;
 `;
 
 
@@ -46,6 +46,7 @@ export const NavItem = styled.div `
 export const SearchWrapper = styled.div`
     position:relative;
     float:left;
+    
     .iconfont{
         position:absolute;
         bottom:5px;
@@ -53,9 +54,11 @@ export const SearchWrapper = styled.div`
         width:30px;
         line-height:30px;
         border-radius:15px;
-        // background:#999;
         text-align:center;
-
+        &.focused{
+            background:#777;
+            color:#fff;
+        }
     }
     
 `;
@@ -65,7 +68,7 @@ width:160px;
 height:38px;
 margin-top:9px;
 margin-left:20px;
-padding:0 30 0 20px;
+padding:0 30px 0 20px;
 border:none;
 outline:none;
 background:#eee;
@@ -75,6 +78,22 @@ border-radius:19px;
 color:#666;
 &::placeholder{
     color:#999
+}
+&.focused{
+    width:240px;
+}
+&.slide-enter{
+    transition:all .2s ease-out;
+    
+}
+&.silde-enter-active{
+    width:240px;
+}
+&.slide-exit{
+    transition:all .2s ease-out;
+}
+&.silde-exit-active{
+    width:160px;
 }
 `;
    
