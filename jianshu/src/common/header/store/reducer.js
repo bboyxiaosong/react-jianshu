@@ -1,19 +1,44 @@
 import * as constans from './constants';
+import { fromJS } from 'immutable';
 
-const defaultState = {
-    focused:false
-};
+
+const defaultState = fromJS({
+    focused:false,
+    list:[]
+});
 
 export default (state = defaultState,action)=>{
-    if(action.type === constans.SEARCH_FOUCUS){
-        const newState = JSON.parse(JSON.stringify(state));
-        newState.focused = true;
-        return newState;
+    // if(action.type === constans.SEARCH_FOUCUS){
+    //     return state.set('focused',true);
+    //     // return {
+    //     //     focused:true
+    //     // };
+    // }
+    // if(action.type === constans.SEARCH_BLUR){
+    //     return state.set('focused',false);
+    //     // return {
+    //     //     focused:false
+    //     // };
+    // }
+    // if(action.type === constans.CHANGE_LIST){
+    //     console.log(action.data)
+    //     console.log(action.data._tail.array)
+    //     const list = action.data._tail.array;
+    //     return state.set('list',list);
+    // }
+    // return state;
+
+    switch(action.type){
+        case constans.SEARCH_FOUCUS :
+            return state.set('focused',true);
+        case constans.SEARCH_BLUR :
+            return state.set('focused',false);
+        case constans.CHANGE_LIST :
+            const list = action.data._tail.array;
+            return state.set('list',list);
+        default:
+            return state;
+
     }
-    if(action.type === constans.SEARCH_BLUR){
-        const newState = JSON.parse(JSON.stringify(state));
-        newState.focused = false;
-        return newState;
-    }
-    return state
+
 }

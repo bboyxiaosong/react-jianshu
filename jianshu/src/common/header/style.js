@@ -96,13 +96,50 @@ color:#666;
     width:160px;
 }
 `;
-   
+export const SearchInfo = styled.div`
+    position:absolute;
+    left:0;
+    top:56px;
+    width:240px;
+    min-height:100px;
+    padding:0 20px;
+    box-shadow: 0 0 8px rgba(0,0,0,.2);
+`;
+export const SearchInfoTitle = styled.div`
+    margin-top:20px;
+    margin-bottom:15px;
+    line-height:20px;
+    font-size:14px;
+    color:#969696;
+`;
+export const SearchInfoSwitch = styled.span`
+    float:right;
+    font-size:13px;
+    color:#969696;
+`;
+export const SearchInfoItem = styled.a`
+    display:block;
+    float:left;
+    padding:0 5px;
+    font-size:12px;
+    line-height:20px;
+    border:1px solid #ddd;
+    color:#787878;
+    border-radius:3px;
+    margin:0 10px 15px 0;
+`;
+export const SearchInfoList = styled.div`
+    overflow:hidden;
+`
+
+
 export const Addition = styled.div`
     position:absolute;
     right:0;
     top:0;
     height:56px;
 `;
+
 export const Button = styled.div`
     float:right;
     margin-top:9px;

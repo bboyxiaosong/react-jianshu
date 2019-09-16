@@ -21,8 +21,55 @@ yarn add react-redux;
 对象管理模块
 
 yarn add immutable
+
+immutable 对象的set方法，会结合之前的immutable对象的值
+和设置的值返回一个全新的对象
+
+
 替换 index.css 重命名为 style.js
-2018 年十月份 开始 
+
+https://blog.csdn.net/purple_lumpy/article/details/88870822
+// 上网址是拆分说明
+
+下步安装 
+
+yarn add redux-immutable
+
+这个工具把state  转换成immutable 对象，
+上面之前操作是把 state里边的值转成了
+immutable 对象
+
+yarn add redux-thunk；
+ 1.redux-thunk 是redux 的中间件 是在创建store的时候使用;
+ 2.其实是对dispacth 方法的一种升级
+ 3. 引入 import thunk from 'redux-thunk';
+ 4.使用它
+ import { createStore,compose, applyMiddleware } from 'redux';
+
+import reducer from './reducer';
+
+import thunk from 'redux-thunk';
+
+
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION__COMPOSE__ ? window.__REDUX_DEVTOOLS_EXTENSION__COMPOSE__({}):compose;
+
+const store = createStore(reducer,composeEnhancers(
+    applyMiddleware(thunk)
+));
+
+export default store;
+
+5.有了redux-thunk 我们就可以在action 里边做异步任务操作了
+actionCreators 里边的方法如果不引入redux-thunk 只能返回一个对象，引入之后
+可以返回一个异步的函数了
+6.安装 数据请求 模块
+yarn add axios;
+
+
+----------------------------------------------------------------
+安装这个模块可以在action 里边写入 函数
+
+2018 年十月份 开始 下面的这个 方法就废除了
 
 import {createGlobalStyle} from 'styled-components';
  
