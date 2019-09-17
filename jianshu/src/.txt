@@ -34,7 +34,14 @@ https://blog.csdn.net/purple_lumpy/article/details/88870822
 下步安装 
 
 yarn add redux-immutable
+import { fromJS } from 'immutable';
 
+const changeList = (data)=>({
+    type:constans.CHANGE_LIST,
+    data:fromJS(data),
+    totalPage:Math.ceil(data.length/10)
+
+});
 这个工具把state  转换成immutable 对象，
 上面之前操作是把 state里边的值转成了
 immutable 对象
@@ -64,7 +71,16 @@ actionCreators 里边的方法如果不引入redux-thunk 只能返回一个对�
 可以返回一个异步的函数了
 6.安装 数据请求 模块
 yarn add axios;
+安装完了引入
 
+import Axios from 'axios';
+使用
+
+// 下一步安装路由
+
+7.yarn add react-router-dom；
+安装完了 引入路由
+import { BrowserHistory,Route } from 'react-router-dom'
 
 ----------------------------------------------------------------
 安装这个模块可以在action 里边写入 函数
