@@ -80,7 +80,53 @@ import Axios from 'axios';
 
 7.yarn add react-router-dom；
 安装完了 引入路由
-import { BrowserHistory,Route } from 'react-router-dom'
+import { BrowserHistory,Route } from 'react-router-dom';
+创建路由组件 Home 然后在App.js引入
+
+import Home from './pages/home';
+然后使用
+ <div>
+<Route path='/' exact component={Home}></Route>
+<Route path='/detail' exact component={Detail}></Route>
+</div>
+Home组件内然后创建新的子组件
+例:Topic 
+在home目录下，创建数据管理  store 文件夹，
+创建reducer.js 
+创建 index.js  在内部引入 reducer.js 
+import reducer from './reducer';
+
+export { reducer } ; 然后导出 
+
+这是为了 在最外层 store中的reducer中， 子reducer 引入格式统一
+
+/*
+这是在store 创建index.js 在大的reducer 中引入方式
+import {reducer as homeReducer}   from '../pages/home/store';
+如果没有创建 index.js 是这么引入
+import homeReducer  from '../pages/home/store/reducer';
+*/
+
+Home 组件内的子组件 Topic 可以共享store 内的数据
+是因为 App.js 内 
+Provider 内的组件可以共享store；
+
+Topic 有使用 store 内数据的权利但是需要做连接；
+怎么做呢？如下
+在Topic 内 引入 connect
+
+import { connect } from 'react-redux';
+
+然后连接
+现在是 导出的 connect 包装过的一个容器组件
+需要穿两个参数 mapState 只得是你在 store 里边拿数据
+const mapState = (state)=>{
+    list:state.getIn(['home','topicList'])
+}
+还有一个 mapDispatch 是你如果需要修改数据 ，如果不需要这两个函数
+可以写成 null
+export default connect(mapState,null)(Topic);
+
 
 ----------------------------------------------------------------
 安装这个模块可以在action 里边写入 函数

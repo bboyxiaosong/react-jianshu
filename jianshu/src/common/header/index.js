@@ -196,7 +196,7 @@ const mapDispatchToProps = (dispatch)=>{
         handleChangePage(page,totalPage,spin){
             
             let originAngle =  spin.style.transform.replace(/[^0-9]/ig,'')
-            console.log(originAngle);
+            // console.log(originAngle);
             if(originAngle){
                 originAngle = parseInt(originAngle,10)
             }else{
