@@ -127,7 +127,26 @@ const mapState = (state)=>{
 可以写成 null
 export default connect(mapState,null)(Topic);
 
+8. 本次编码 节 8-7 没有改，Home 组件中list 组件拆分，
+/*
+拆分就是创建 actionCreators 利用redux-thunk 返回一个函数
+然后创建contans
+*
+/
+home组件没有采用拆分方便，与子组件中作对比
+ 
+/**
+PureComponent
+引入这个组件是为了与 immutable.js 配合和使用
+如果没有配合immutable.js  建议使用 shouldComponentUpdate
+方法
 
+*/ 
+
+页面跳转 使用 import {Link} react-router-dom;
+
+ <Link to='/detail'>
+ 
 ----------------------------------------------------------------
 安装这个模块可以在action 里边写入 函数
 

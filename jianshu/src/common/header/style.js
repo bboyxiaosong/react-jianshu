@@ -9,7 +9,8 @@ export const HeaderWrapper = styled.div `
 
 
 
-export const Logo = styled.a.attrs({href:'/'}) `
+// export const Logo = styled.a.attrs({href:'/'}) `
+export const Logo = styled.div `
     position:absolute; 
     top:0;
     left:0;
@@ -37,6 +38,7 @@ export const NavItem = styled.div `
     &.right{
         float:right
         color:#969696;
+        cursor:pointer;
     }
     &.active{
         color:#ea6f5a;

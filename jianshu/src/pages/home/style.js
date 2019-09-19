@@ -105,5 +105,19 @@ export const WriterWraper = styled.div`
     line-height:300px;
     text-align:center;
 `;
+export const BackTop = styled.div`
+    width:60px;
+    border-radius:50%;
+    height:60px;
+    line-height:60px;
+    text-align:center;
+    position:fixed;
+    right:100px;
+    bottom:100px;
+    font-size:16px;
+    color:#fff;
+    background:#000;
+`;
+
 
 
