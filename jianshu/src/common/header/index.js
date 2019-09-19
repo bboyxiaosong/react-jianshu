@@ -165,7 +165,9 @@ class Header extends Component{
                 </SearchWrapper>
             </Nav>
             <Addition>
-                <Button className="writing">写文章</Button>
+               <Link to='/write'> 
+                    <Button className="writing">写文章</Button>
+               </Link>
                 <Button className="reg">注册</Button>
             </Addition>
         </HeaderWrapper>
