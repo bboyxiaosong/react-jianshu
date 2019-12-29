@@ -1,215 +1,215 @@
 
-1 开发简书
-2 创建项目
-    npx create-react-app my-app
-    cd my-app
-    npm start
-3 整理文件 
- App.js 
- index.js
- index.css
+    1 开发简书
+    2 创建项目
+        npx create-react-app my-app
+        cd my-app
+        npm start
+    3 整理文件 
+    App.js 
+    index.js
+    index.css
 
-4. 安装 css 管理模块 
-yarn add styled-components;
+    4. 安装 css 管理模块 
+    yarn add styled-components;
 
-css 动画 模块
-yarn add css-transition-group;
-数据管理
-yarn add redux;
+    css 动画 模块
+    yarn add css-transition-group;
+    数据管理
+    yarn add redux;
 
-yarn add react-redux;
-对象管理模块
+    yarn add react-redux;
+    对象管理模块
 
-yarn add immutable
+    yarn add immutable
 
-immutable 对象的set方法，会结合之前的immutable对象的值
-和设置的值返回一个全新的对象
-
-
-替换 index.css 重命名为 style.js
-
-https://blog.csdn.net/purple_lumpy/article/details/88870822
-// 上网址是拆分说明
-
-下步安装 
-
-yarn add redux-immutable
-import { fromJS } from 'immutable';
-
-const changeList = (data)=>({
-    type:constans.CHANGE_LIST,
-    data:fromJS(data),
-    totalPage:Math.ceil(data.length/10)
-
-});
-这个工具把state  转换成immutable 对象，
-上面之前操作是把 state里边的值转成了
-immutable 对象
-
-yarn add redux-thunk；
- 1.redux-thunk 是redux 的中间件 是在创建store的时候使用;
- 2.其实是对dispacth 方法的一种升级
- 3. 引入 import thunk from 'redux-thunk';
- 4.使用它
- import { createStore,compose, applyMiddleware } from 'redux';
-
-import reducer from './reducer';
-
-import thunk from 'redux-thunk';
+    immutable 对象的set方法，会结合之前的immutable对象的值
+    和设置的值返回一个全新的对象
 
 
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION__COMPOSE__ ? window.__REDUX_DEVTOOLS_EXTENSION__COMPOSE__({}):compose;
+    替换 index.css 重命名为 style.js
 
-const store = createStore(reducer,composeEnhancers(
-    applyMiddleware(thunk)
-));
+    https://blog.csdn.net/purple_lumpy/article/details/88870822
+    // 上网址是拆分说明
 
-export default store;
+    下步安装 
 
-5.有了redux-thunk 我们就可以在action 里边做异步任务操作了
-actionCreators 里边的方法如果不引入redux-thunk 只能返回一个对象，引入之后
-可以返回一个异步的函数了
-6.安装 数据请求 模块
-yarn add axios;
-安装完了引入
+    yarn add redux-immutable
+    import { fromJS } from 'immutable';
 
-import Axios from 'axios';
-使用
+    const changeList = (data)=>({
+        type:constans.CHANGE_LIST,
+        data:fromJS(data),
+        totalPage:Math.ceil(data.length/10)
 
-// 下一步安装路由
+    });
+    这个工具把state  转换成immutable 对象，
+    上面之前操作是把 state里边的值转成了
+    immutable 对象
 
-7.yarn add react-router-dom；
-安装完了 引入路由
-import { BrowserHistory,Route } from 'react-router-dom';
-创建路由组件 Home 然后在App.js引入
+    yarn add redux-thunk；
+    1.redux-thunk 是redux 的中间件 是在创建store的时候使用;
+    2.其实是对dispacth 方法的一种升级
+    3. 引入 import thunk from 'redux-thunk';
+    4.使用它
+    import { createStore,compose, applyMiddleware } from 'redux';
 
-import Home from './pages/home';
-然后使用
- <div>
-<Route path='/' exact component={Home}></Route>
-<Route path='/detail' exact component={Detail}></Route>
-</div>
-Home组件内然后创建新的子组件
-例:Topic 
-在home目录下，创建数据管理  store 文件夹，
-创建reducer.js 
-创建 index.js  在内部引入 reducer.js 
-import reducer from './reducer';
+    import reducer from './reducer';
 
-export { reducer } ; 然后导出 
+    import thunk from 'redux-thunk';
 
-这是为了 在最外层 store中的reducer中， 子reducer 引入格式统一
 
-/*
-这是在store 创建index.js 在大的reducer 中引入方式
-import {reducer as homeReducer}   from '../pages/home/store';
-如果没有创建 index.js 是这么引入
-import homeReducer  from '../pages/home/store/reducer';
-*/
+    const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION__COMPOSE__ ? window.__REDUX_DEVTOOLS_EXTENSION__COMPOSE__({}):compose;
 
-Home 组件内的子组件 Topic 可以共享store 内的数据
-是因为 App.js 内 
-Provider 内的组件可以共享store；
+    const store = createStore(reducer,composeEnhancers(
+        applyMiddleware(thunk)
+    ));
 
-Topic 有使用 store 内数据的权利但是需要做连接；
-怎么做呢？如下
-在Topic 内 引入 connect
+    export default store;
 
-import { connect } from 'react-redux';
+    5.有了redux-thunk 我们就可以在action 里边做异步任务操作了
+    actionCreators 里边的方法如果不引入redux-thunk 只能返回一个对象，引入之后
+    可以返回一个异步的函数了
+    6.安装 数据请求 模块
+    yarn add axios;
+    安装完了引入
 
-然后连接
-现在是 导出的 connect 包装过的一个容器组件
-需要穿两个参数 mapState 只得是你在 store 里边拿数据
-const mapState = (state)=>{
-    list:state.getIn(['home','topicList'])
-}
-还有一个 mapDispatch 是你如果需要修改数据 ，如果不需要这两个函数
-可以写成 null
-export default connect(mapState,null)(Topic);
+    import Axios from 'axios';
+    使用
 
-8. 本次编码 节 8-7 没有改，Home 组件中list 组件拆分，
-/*
-拆分就是创建 actionCreators 利用redux-thunk 返回一个函数
-然后创建contans
-*
-/
-home组件没有采用拆分方便，与子组件中作对比
- 
-/**
-PureComponent
-引入这个组件是为了与 immutable.js 配合和使用
-如果没有配合immutable.js  建议使用 shouldComponentUpdate
-方法
+    // 下一步安装路由
 
-*/ 
+    7.yarn add react-router-dom；
+    安装完了 引入路由
+    import { BrowserHistory,Route } from 'react-router-dom';
+    创建路由组件 Home 然后在App.js引入
 
-页面跳转 使用 import {Link} react-router-dom;
+    import Home from './pages/home';
+    然后使用
+    <div>
+    <Route path='/' exact component={Home}></Route>
+    <Route path='/detail' exact component={Detail}></Route>
+    </div>
+    Home组件内然后创建新的子组件
+    例:Topic 
+    在home目录下，创建数据管理  store 文件夹，
+    创建reducer.js 
+    创建 index.js  在内部引入 reducer.js 
+    import reducer from './reducer';
 
- <Link to='/detail'>
+    export { reducer } ; 然后导出 
 
-// 异步组件 加载 安装模块 异步组件
-yarn add react-loadable 
-----------------------------------------------------------------
-安装这个模块可以在action 里边写入 函数
+    这是为了 在最外层 store中的reducer中， 子reducer 引入格式统一
 
-2018 年十月份 开始 下面的这个 方法就废除了
+    /*
+    这是在store 创建index.js 在大的reducer 中引入方式
+    import {reducer as homeReducer}   from '../pages/home/store';
+    如果没有创建 index.js 是这么引入
+    import homeReducer  from '../pages/home/store/reducer';
+    */
 
-import {createGlobalStyle} from 'styled-components';
- 
-export const GlobalStyle = createGlobalStyle`
-    body {
-        background: blue;
+    Home 组件内的子组件 Topic 可以共享store 内的数据
+    是因为 App.js 内 
+    Provider 内的组件可以共享store；
+
+    Topic 有使用 store 内数据的权利但是需要做连接；
+    怎么做呢？如下
+    在Topic 内 引入 connect
+
+    import { connect } from 'react-redux';
+
+    然后连接
+    现在是 导出的 connect 包装过的一个容器组件
+    需要穿两个参数 mapState 只得是你在 store 里边拿数据
+    const mapState = (state)=>{
+        list:state.getIn(['home','topicList'])
     }
-`;
+    还有一个 mapDispatch 是你如果需要修改数据 ，如果不需要这两个函数
+    可以写成 null
+    export default connect(mapState,null)(Topic);
 
-import React, { Component,Fragment } from 'react';
-import Header from "./common/header";
-//导入样式文件
-注：在styled-component V4版本中injectGlobal API除去，取而代之的是createGlobalStyle样式组件。
-import {GlobalStyle} from "./style";
- 
-class App extends Component {
-    render() {
-        return (
-            <Fragment>
-                <GlobalStyle/>
-                    <Header/>
-            </Fragment>
-        )
+    8. 本次编码 节 8-7 没有改，Home 组件中list 组件拆分，
+    /*
+    拆分就是创建 actionCreators 利用redux-thunk 返回一个函数
+    然后创建contans
+    *
+    /
+    home组件没有采用拆分方便，与子组件中作对比
+    
+    /**
+    PureComponent
+    引入这个组件是为了与 immutable.js 配合和使用
+    如果没有配合immutable.js  建议使用 shouldComponentUpdate
+    方法
+
+    */ 
+
+    页面跳转 使用 import {Link} react-router-dom;
+
+    <Link to='/detail'>
+
+    // 异步组件 加载 安装模块 异步组件
+    yarn add react-loadable 
+    ----------------------------------------------------------------
+    安装这个模块可以在action 里边写入 函数
+
+    2018 年十月份 开始 下面的这个 方法就废除了
+
+    import {createGlobalStyle} from 'styled-components';
+    
+    export const GlobalStyle = createGlobalStyle`
+        body {
+            background: blue;
+        }
+    `;
+
+    import React, { Component,Fragment } from 'react';
+    import Header from "./common/header";
+    //导入样式文件
+    注：在styled-component V4版本中injectGlobal API除去，取而代之的是createGlobalStyle样式组件。
+    import {GlobalStyle} from "./style";
+    
+    class App extends Component {
+        render() {
+            return (
+                <Fragment>
+                    <GlobalStyle/>
+                        <Header/>
+                </Fragment>
+            )
+        }
     }
-}
 
-export default App;
-原文链接：https://blog.csdn.net/qq_32063079/article/details/83277054
+    export default App;
+    原文链接：https://blog.csdn.net/qq_32063079/article/details/83277054
 
-5. 在 src 目录下创建common 文件夹
-然后创建组件文件夹 header
-index.js
-如下
-import React,{ Component } from 'react';
+    5. 在 src 目录下创建common 文件夹
+    然后创建组件文件夹 header
+    index.js
+    如下
+    import React,{ Component } from 'react';
 
-import {
-    HeaderWrapper
-} from './style'
-class Header extends Component{
-    render(){
-        return (
-            <HeaderWrapper>
-                Header
-            </HeaderWrapper>
-        )
+    import {
+        HeaderWrapper
+    } from './style'
+    class Header extends Component{
+        render(){
+            return (
+                <HeaderWrapper>
+                    Header
+                </HeaderWrapper>
+            )
+        }
     }
-}
-export default Header;
-////////////////////////////
-style.js
-如下
-import styled  from 'styled-components';
+    export default Header;
+    ////////////////////////////
+    style.js
+    如下
+    import styled  from 'styled-components';
 
-export const HeaderWrapper = styled.div `
-    height:58px;
-    border-bottom:1px solid #f0f0f0;
-` 
-6.下一步就开始编码了
-style.js 
-每一个元素都是作为组件 使用
+    export const HeaderWrapper = styled.div `
+        height:58px;
+        border-bottom:1px solid #f0f0f0;
+    ` 
+    6.下一步就开始编码了
+    style.js 
+    每一个元素都是作为组件 使用
